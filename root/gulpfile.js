@@ -1,9 +1,12 @@
 const gulp = require('gulp');
 const fileInclude = require('gulp-file-include');
-const replace = require('gulp-replace');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
+const htmlmin = require('gulp-htmlmin');
+const gulpIf = require('gulp-if');
 const browserSync = require('browser-sync').create();
+
+const isProd = process.env.NODE_ENV === 'production';
 
 const paths = {
   html:    'src/pages/**/*.html',
@@ -21,13 +24,14 @@ function html() {
   return gulp.src(paths.html)
     .pipe(fileInclude({
       prefix: '@@',
-      basepath: '@file',
-      indent: true
+      basepath: '@file'
     }))
-    .pipe(replace(
-      /<link[^>]*fonts\.googleapis[^>]*>/g,
-      '<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">'
-    ))
+    .pipe(gulpIf(isProd, htmlmin({
+      collapseWhitespace: true,
+      removeComments: true,
+      minifyCSS: true,
+      minifyJS: true
+    })))
     .pipe(gulp.dest(paths.dist))
     .pipe(browserSync.stream());
 }
@@ -48,7 +52,7 @@ function js() {
     .pipe(browserSync.stream());
 }
 
-// ---------- IMG (просто копирование) ----------
+// ---------- IMG ----------
 function img() {
   return gulp.src(paths.img)
     .pipe(gulp.dest(paths.dist + 'assets/img'));
@@ -78,7 +82,8 @@ function serve() {
     server: { baseDir: 'dist' },
     notify: false,
     open: false,
-    port: 3000
+    port: 3000,
+    ui: { port: 3001 }
   });
 
   gulp.watch([paths.html, paths.partials], html);
