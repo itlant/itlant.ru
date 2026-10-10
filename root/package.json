@@ -16,6 +16,8 @@
     "gulp-clean-css": "^4.3.0",
     "gulp-file-include": "^2.3.0",
     "gulp-if": "^3.0.0",
+    "gulp-ignore": "^3.0.0",
+    "gulp-sitemap": "^8.0.0",
     "gulp-uglify": "^3.0.2",
     "rimraf": "^5.0.5"
   }
