@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+  @@include('../partials/head.html', { "title": "404 — Страница не найдена | ITLANT", "description": "Страница не найдена. Возможно, она была удалена или вы ошиблись в адресе.", "canonical": "https://itlant.ru/404/" })
+  <body>
+    <a href="#main" class="skip-link">Перейти к содержимому</a>
+
+    @@include('../partials/header.html')
+
+    <main id="main" class="error-page">
+      <div class="container error-page__inner">
+        <div class="win-window error-page__window">
+          <div class="win-window__titlebar">
+            <span class="win-window__title">ERROR_404.EXE</span>
+            <div class="win-window__controls">
+              <button aria-label="Закрыть">×</button>
+            </div>
+          </div>
+
+          <div class="win-window__body">
+            <h1 class="error-page__code">404</h1>
+            <p class="error-page__text">
+              Страница потерялась где-то в 90-х.<br />
+              Возможно, она была удалена или вы ошиблись в адресе.
+            </p>
+            <div class="error-page__actions">
+              <a href="/" class="btn btn--primary">На главную</a>
+              <button class="btn btn--ghost" data-modal-open>
+                Написать нам
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    @@include('../partials/footer.html') @@include('../partials/modal.html')
+    @@include('../partials/scripts.html')
+  </body>
+</html>

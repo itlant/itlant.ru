@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+  @@include('../partials/head.html', { "title": "Блог о разработке и SEO — ITLANT", "description": "Статьи о разработке сайтов на WordPress и Tilda, SEO-продвижении, интеграции 1С и настройке Яндекс.Рекламы.", "canonical": "https://itlant.ru/blog/" })
+  <body>
+    <a href="#main" class="skip-link">Перейти к содержимому</a>
+
+    @@include('../partials/header.html')
+
+    <main id="main">
+      <!-- HERO -->
+      <section class="blog-hero">
+        <div class="container">
+          <h1>&gt; БЛОГ</h1>
+          <p>Практические статьи о разработке, SEO и рекламе.</p>
+        </div>
+      </section>
+
+      <!-- Фильтры -->
+      <nav class="blog-filters container" aria-label="Категории статей">
+        <a href="/blog.html" class="blog-filters__item is-active">Все</a>
+        <a href="/blog.html" class="blog-filters__item">Разработка</a>
+        <a href="/blog.html" class="blog-filters__item">SEO</a>
+        <a href="/blog.html" class="blog-filters__item">Реклама</a>
+        <a href="/blog.html" class="blog-filters__item">Интеграции</a>
+      </nav>
+
+      <!-- Сетка статей -->
+      <section class="blog-grid container">
+        <article class="article-card">
+          <a href="/article.html" class="article-card__link">
+            <div class="article-card__preview" aria-hidden="true"></div>
+            <time class="article-card__date" datetime="2024-09-15"
+              >15.09.2024</time
+            >
+            <h2 class="article-card__title">
+              Как выбрать подрядчика для разработки сайта
+            </h2>
+            <p class="article-card__excerpt">
+              7 критериев, которые сэкономят вам бюджет и нервы.
+            </p>
+          </a>
+        </article>
+
+        <article class="article-card">
+          <a href="/article.html" class="article-card__link">
+            <div class="article-card__preview" aria-hidden="true"></div>
+            <time class="article-card__date" datetime="2024-09-10"
+              >10.09.2024</time
+            >
+            <h2 class="article-card__title">
+              WordPress или Tilda: что выбрать в 2024
+            </h2>
+            <p class="article-card__excerpt">
+              Сравниваем по 10 параметрам: цена, сроки, SEO, масштабируемость.
+            </p>
+          </a>
+        </article>
+
+        <article class="article-card">
+          <a href="/article.html" class="article-card__link">
+            <div class="article-card__preview" aria-hidden="true"></div>
+            <time class="article-card__date" datetime="2024-09-05"
+              >05.09.2024</time
+            >
+            <h2 class="article-card__title">
+              Сколько стоит SEO-продвижение в 2024
+            </h2>
+            <p class="article-card__excerpt">
+              Разбираем ценообразование и на чём нельзя экономить.
+            </p>
+          </a>
+        </article>
+
+        <article class="article-card">
+          <a href="/article.html" class="article-card__link">
+            <div class="article-card__preview" aria-hidden="true"></div>
+            <time class="article-card__date" datetime="2024-08-28"
+              >28.08.2024</time
+            >
+            <h2 class="article-card__title">
+              Интеграция 1С с сайтом: пошаговый план
+            </h2>
+            <p class="article-card__excerpt">
+              Как связать товары, цены и заказы без боли.
+            </p>
+          </a>
+        </article>
+
+        <article class="article-card">
+          <a href="/article.html" class="article-card__link">
+            <div class="article-card__preview" aria-hidden="true"></div>
+            <time class="article-card__date" datetime="2024-08-20"
+              >20.08.2024</time
+            >
+            <h2 class="article-card__title">
+              Как настроить Яндекс.Рекламу самостоятельно
+            </h2>
+            <p class="article-card__excerpt">
+              Пошаговая инструкция для новичков с чеклистом.
+            </p>
+          </a>
+        </article>
+
+        <article class="article-card">
+          <a href="/article.html" class="article-card__link">
+            <div class="article-card__preview" aria-hidden="true"></div>
+            <time class="article-card__date" datetime="2024-08-15"
+              >15.08.2024</time
+            >
+            <h2 class="article-card__title">
+              SEO-оптимизация своими руками: с чего начать
+            </h2>
+            <p class="article-card__excerpt">
+              Топ-10 действий, которые дадут результат уже в первый месяц.
+            </p>
+          </a>
+        </article>
+      </section>
+
+      <!-- Пагинация -->
+      <nav class="pagination container" aria-label="Пагинация">
+        <span class="pagination__current">1</span>
+        <a href="/blog.html" class="pagination__link">2</a>
+        <a href="/blog.html" class="pagination__link">3</a>
+        <a href="/blog.html" class="pagination__next">Далее →</a>
+      </nav>
+    </main>
+
+    @@include('../partials/footer.html') @@include('../partials/modal.html')
+    @@include('../partials/scripts.html')
+  </body>
+</html>

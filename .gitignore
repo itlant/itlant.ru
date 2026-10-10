@@ -1,0 +1,28 @@
+# Зависимости
+node_modules/
+vendor/
+
+# Сборка
+dist/
+wordpress/itlant-theme/style.min.css
+wordpress/itlant-theme/main.min.js
+
+# Логи и временные файлы
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Редакторы
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+
+# Окружение
+.env
+.env.local
+
+# Кэш
+.cache/
+.parcel-cache/

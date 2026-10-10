@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+  @@include('../partials/head.html', { "title": "Заявка отправлена — ITLANT", "description": "Спасибо! Ваша заявка получена. Мы свяжемся с вами в течение 2 часов.", "canonical": "https://itlant.ru/success/" })
+  <body>
+    <a href="#main" class="skip-link">Перейти к содержимому</a>
+
+    @@include('../partials/header.html')
+
+    <main id="main" class="success-page">
+      <div class="container success-page__inner">
+        <div class="win-window success-page__window">
+          <div class="win-window__titlebar">
+            <span class="win-window__title">SUCCESS.EXE</span>
+            <div class="win-window__controls">
+              <button aria-label="Закрыть">×</button>
+            </div>
+          </div>
+
+          <div class="win-window__body">
+            <div class="success-page__icon" aria-hidden="true">✓</div>
+            <h1 class="success-page__title">ЗАЯВКА ОТПРАВЛЕНА!</h1>
+            <p class="success-page__text">
+              Спасибо! Мы свяжемся с вами в течение 2 часов в рабочее время.
+            </p>
+            <div class="success-page__actions">
+              <a href="/" class="btn btn--primary">На главную</a>
+              <a href="/blog.html" class="btn btn--ghost">Читать блог</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    @@include('../partials/footer.html') @@include('../partials/scripts.html')
+  </body>
+</html>
