@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const fileInclude = require('gulp-file-include');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
 const htmlmin = require('gulp-htmlmin');
 const gulpIf = require('gulp-if');
 const sitemap = require('gulp-sitemap');
@@ -43,6 +44,7 @@ function html() {
 function css() {
   return gulp.src(paths.css)
     .pipe(cleanCSS())
+    .pipe(gulpIf(isProd, rename({ suffix: '.min' })))
     .pipe(gulp.dest(paths.dist + 'assets/css'))
     .pipe(browserSync.stream());
 }
@@ -51,6 +53,7 @@ function css() {
 function js() {
   return gulp.src(paths.js)
     .pipe(uglify())
+    .pipe(gulpIf(isProd, rename({ suffix: '.min' })))
     .pipe(gulp.dest(paths.dist + 'assets/js'))
     .pipe(browserSync.stream());
 }

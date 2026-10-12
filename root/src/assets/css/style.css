@@ -10,7 +10,8 @@
   --text-primary: #ffffff;
   --text-secondary: #888888;
   --text-dark: #1a1a1a;
-  --accent-cyan: #00ffff;
+  /* --accent-cyan: #00ffff; */
+  --accent-cyan: #039b9b;
   --accent-magenta: #ff00ff;
   --accent-purple: #9b59b6;
   --accent-green: #00ff00;
@@ -85,7 +86,8 @@ img { max-width: 100%; height: auto; display: block; }
   font-family: var(--font-mono);
   color: var(--text-primary);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 .nav__link:hover { color: var(--accent-cyan); text-decoration: none; }
 

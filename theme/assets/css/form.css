@@ -1,0 +1,18 @@
+.form__input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid #000;
+  background: #fff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #000;
+}
+
+.form--compact .form__input {
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+/* Скрываем дефолтный <p> CF7 */
+.form--compact br { display: none; }
+.form--compact p { margin: 0; }

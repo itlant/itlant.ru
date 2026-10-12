@@ -26,3 +26,13 @@ Thumbs.db
 # Кэш
 .cache/
 .parcel-cache/
+
+# WordPress целиком
+wp/
+
+# Сборка Gulp
+root/dist/
+root/node_modules/
+
+# Локальные настройки темы, если появятся
+theme/.cache/
