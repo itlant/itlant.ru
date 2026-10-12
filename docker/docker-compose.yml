@@ -7,7 +7,7 @@ services:
       - "8080:80"
     volumes:
       - ../wp:/var/www/html
-      - ../theme:/var/www/html/wp-content/themes/itlant
+      - ../theme:/var/www/html/wp-content/themes/itlant-theme
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
@@ -22,8 +22,8 @@ services:
     restart: unless-stopped
     volumes:
       - ../wp:/var/www/html
-      - ../theme:/var/www/html/wp-content/themes/itlant
-      - ../root/dist/assets:/var/www/html/wp-content/themes/itlant/assets
+      - ../theme:/var/www/html/wp-content/themes/itlant-theme
+      - ../root/dist/assets:/var/www/html/wp-content/themes/itlant-theme/assets
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_NAME: itlant

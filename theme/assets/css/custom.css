@@ -37,3 +37,19 @@
   }
 }
 
+.nav__link {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.article__content {
+  padding: 0;
+}
+
+.article__content li, .article__content p {
+  margin-bottom: 8px;
+}
+
+.article-card__link:hover {
+  text-decoration: none;
+}

@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: 1fr 320px;
   gap: 48px;
-  padding: 64px 24px;
+  padding: 24px;
   align-items: start;
 }
 
