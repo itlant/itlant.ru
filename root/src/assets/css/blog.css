@@ -116,6 +116,168 @@
 }
 
 /* ============================================
+   СТАТЬЯ — LAYOUT С САЙДБАРОМ
+   ============================================ */
+.article-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+  padding: 48px 24px;
+  align-items: start;
+}
+
+.article-layout__main {
+  min-width: 0;
+  /* защита от grid + длинных слов */
+}
+
+@media (max-width: 992px) {
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 24px;
+  }
+
+  /* Сайдбар уходит наверх, но НЕ sticky */
+  .article-toc-sidebar {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    order: -1;
+  }
+}
+
+/* ============================================
+   САЙДБАР — СОДЕРЖАНИЕ
+   ============================================ */
+.article-toc-sidebar {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.article-toc-sidebar__inner {
+  border: 1px solid var(--border-dark);
+  padding: 20px;
+}
+
+/* Скрываем скроллбар */
+.article-toc-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.article-toc-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border-dark);
+}
+
+.article-toc-sidebar__title {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.article-toc-sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: toc;
+}
+
+.article-toc-sidebar__item {
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.article-toc-sidebar__item:last-child {
+  border-bottom: none;
+}
+
+.article-toc-sidebar__link {
+  display: flex;
+  gap: 8px;
+  padding: 10px 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.article-toc-sidebar__link:hover {
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+
+.article-toc-sidebar__num {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   CTA В САЙДБАРЕ
+   ============================================ */
+.article-toc-sidebar__cta {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-dark);
+}
+
+.article-toc-sidebar__cta-text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* ============================================
+   СТАТЬЯ — отступы
+   ============================================ */
+.article__header {
+  padding: 48px 24px 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article__content {
+  max-width: 100%;
+  /* в grid-сайдбаре контент уже ограничен колонкой */
+  padding: 0;
+}
+
+.article__tags {
+  padding: 24px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.article__footer {
+  padding: 24px 0 0;
+  border-top: 1px solid var(--border-dark);
+  margin-top: 32px;
+}
+
+/* ============================================
+   АДАПТИВ
+   ============================================ */
+@media (max-width: 992px) {
+
+  /* На мобильных скрываем сайдбар с содержанием — он неудобен */
+  .article-toc-sidebar {
+    display: none;
+  }
+
+  .article__header {
+    padding: 32px 24px 16px;
+  }
+}
+
+/* ============================================
    ТЕГИ СТАТЬИ
    ============================================ */
 .article__tags {
@@ -196,4 +358,13 @@
   .article-card__preview {
     margin: -20px -20px 16px -20px;
   }
+}
+
+.article-toc-sidebar__link.is-active {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.article-toc-sidebar__link.is-active .article-toc-sidebar__num {
+  color: var(--accent-cyan);
 }

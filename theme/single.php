@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Одна статья блога
  */
@@ -13,7 +12,7 @@ get_header();
 
     <?php get_template_part('template-parts/breadcrumbs'); ?>
 
-    <article class="article">
+    <article class="article article--with-toc">
 
       <header class="article__header container">
         <?php
@@ -42,30 +41,42 @@ get_header();
         </p>
       </header>
 
-      <div class="article__content container">
-        <?php the_content(); ?>
+      <!-- ============ LAYOUT: КОНТЕНТ + САЙДБАР ============ -->
+      <div class="container article-layout">
+
+        <!-- Основной контент -->
+        <div class="article-layout__main">
+          <div class="article__content">
+            <?php the_content(); ?>
+          </div>
+
+          <!-- Теги -->
+          <?php
+          $tags = get_the_tags();
+          if ($tags) :
+          ?>
+            <div class="article__tags">
+              <?php foreach ($tags as $tag) : ?>
+                <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>" class="article__tag">
+                  #<?php echo esc_html($tag->name); ?>
+                </a>
+              <?php endforeach; ?>
+            </div>
+          <?php endif; ?>
+
+          <!-- Автор -->
+          <footer class="article__footer">
+            <div class="article__author">
+              <strong><?php the_author(); ?></strong>
+              <p><?php echo esc_html(get_the_author_meta('description')); ?></p>
+            </div>
+          </footer>
+        </div>
+
+        <!-- Сайдбар с содержанием -->
+        <?php get_template_part('template-parts/toc'); ?>
+
       </div>
-
-      <!-- Теги статьи -->
-      <?php
-      $tags = get_the_tags();
-      if ($tags) :
-      ?>
-        <div class="article__tags container">
-          <?php foreach ($tags as $tag) : ?>
-            <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>" class="article__tag">
-              #<?php echo esc_html($tag->name); ?>
-            </a>
-          <?php endforeach; ?>
-        </div>
-      <?php endif; ?>
-
-      <footer class="article__footer container">
-        <div class="article__author">
-          <strong><?php the_author(); ?></strong>
-          <p><?php echo esc_html(get_the_author_meta('description')); ?></p>
-        </div>
-      </footer>
 
     </article>
 

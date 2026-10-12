@@ -1,35 +1,33 @@
-const gulp = require('gulp');
-const fileInclude = require('gulp-file-include');
-const cleanCSS = require('gulp-clean-css');
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
-const htmlmin = require('gulp-htmlmin');
-const gulpIf = require('gulp-if');
-const sitemap = require('gulp-sitemap');
-const ignore = require('gulp-ignore');
-const browserSync = require('browser-sync').create();
+const gulp         = require('gulp');
+const fileInclude  = require('gulp-file-include');
+const cleanCSS     = require('gulp-clean-css');
+const uglify       = require('gulp-uglify');
+const rename       = require('gulp-rename');
+const htmlmin      = require('gulp-htmlmin');
+const gulpIf       = require('gulp-if');
+const sitemap      = require('gulp-sitemap');
+const ignore       = require('gulp-ignore');
+const browserSync  = require('browser-sync').create();
 
 const isProd = process.env.NODE_ENV === 'production';
 
 const paths = {
-  html:     'src/pages/**/*.html',
-  partials: 'src/partials/**/*.html',
-  css:      'src/assets/css/**/*.css',
-  js:       'src/assets/js/**/*.js',
-  img:      'src/assets/img/**/*',
-  fonts:    'src/assets/fonts/**/*',
-  favicon:  'src/assets/favicon/**/*',
-  static:   'src/static/**/*',
-  dist:     'dist/'
+  html:        'src/pages/**/*.html',
+  partials:    'src/partials/**/*.html',
+  css:         'src/assets/css/**/*.css',
+  js:          'src/assets/js/**/*.js',
+  img:         'src/assets/img/**/*',
+  fonts:       'src/assets/fonts/**/*',
+  favicon:     'src/assets/favicon/**/*',
+  static:      'src/static/**/*',
+  dist:        'dist/',
+  themeAssets: '../theme/assets/',
 };
 
 // ---------- HTML ----------
 function html() {
   return gulp.src(paths.html)
-    .pipe(fileInclude({
-      prefix: '@@',
-      basepath: '@file'
-    }))
+    .pipe(fileInclude({ prefix: '@@', basepath: '@file' }))
     .pipe(gulpIf(isProd, htmlmin({
       collapseWhitespace: true,
       removeComments: true,
@@ -44,7 +42,7 @@ function html() {
 function css() {
   return gulp.src(paths.css)
     .pipe(cleanCSS())
-    .pipe(gulpIf(isProd, rename({ suffix: '.min' })))
+    .pipe(rename({ suffix: '.min' }))          // всегда .min
     .pipe(gulp.dest(paths.dist + 'assets/css'))
     .pipe(browserSync.stream());
 }
@@ -53,7 +51,7 @@ function css() {
 function js() {
   return gulp.src(paths.js)
     .pipe(uglify())
-    .pipe(gulpIf(isProd, rename({ suffix: '.min' })))
+    .pipe(rename({ suffix: '.min' }))          // всегда .min
     .pipe(gulp.dest(paths.dist + 'assets/js'))
     .pipe(browserSync.stream());
 }
@@ -76,19 +74,17 @@ function favicon() {
     .pipe(gulp.dest(paths.dist + 'assets/favicon'));
 }
 
-// ---------- STATIC (robots.txt и др.) ----------
+// ---------- STATIC ----------
 function staticFiles() {
   return gulp.src(paths.static)
     .pipe(gulp.dest(paths.dist));
 }
 
-// ---------- SITEMAP (после html!) ----------
+// ---------- SITEMAP ----------
 function seo() {
   return gulp.src('dist/**/*.html', { read: false })
     .pipe(ignore.exclude(['**/success.html', '**/404.html']))
-    .pipe(sitemap({
-      siteUrl: 'https://itlant.ru'
-    }))
+    .pipe(sitemap({ siteUrl: 'https://itlant.ru' }))
     .pipe(gulp.dest(paths.dist));
 }
 
@@ -96,6 +92,18 @@ function seo() {
 function clean(cb) {
   require('rimraf').sync('dist');
   cb();
+}
+
+// ---------- COPY TO THEME ----------  ← ДОБАВЛЯЕМ ЗДЕСЬ
+function copyToTheme() {
+  return gulp.src([
+    'dist/assets/css/**/*',
+    'dist/assets/js/**/*',
+    'dist/assets/fonts/**/*',
+    'dist/assets/img/**/*',
+    'dist/assets/favicon/**/*',
+  ], { base: 'dist/assets' })
+    .pipe(gulp.dest(paths.themeAssets));
 }
 
 // ---------- SERVE + WATCH ----------
@@ -117,8 +125,8 @@ function serve() {
 
 // ---------- TASKS ----------
 const assets = gulp.parallel(html, css, js, img, fonts, favicon, staticFiles);
-const build = gulp.series(clean, assets, seo);
-const dev = gulp.series(clean, assets, serve);
+const build  = gulp.series(clean, assets, seo, copyToTheme);   // ✅ теперь copyToTheme объявлена
+const dev    = gulp.series(clean, assets, serve);
 
 exports.html        = html;
 exports.css         = css;
@@ -129,5 +137,6 @@ exports.favicon     = favicon;
 exports.staticFiles = staticFiles;
 exports.seo         = seo;
 exports.clean       = clean;
+exports.copyToTheme = copyToTheme;
 exports.build       = build;
 exports.default     = dev;

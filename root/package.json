@@ -7,6 +7,7 @@
     "dev": "gulp",
     "build": "gulp build",
     "build:prod": "cross-env NODE_ENV=production gulp build",
+    "deploy": "gulp build && gulp copyToTheme",
     "clean": "rimraf dist"
   },
   "devDependencies": {

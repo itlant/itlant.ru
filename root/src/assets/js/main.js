@@ -57,3 +57,37 @@
     }
   }
 })();
+
+// ============ ACTIVE TOC ============
+(function () {
+  const tocLinks = document.querySelectorAll(".article-toc-sidebar__link");
+  if (!tocLinks.length) return;
+
+  const sections = Array.from(tocLinks)
+    .map((link) => {
+      const id = link.getAttribute("href");
+      return document.querySelector(id);
+    })
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  function updateActive() {
+    const scrollY = window.scrollY + 120;
+    let current = sections[0];
+
+    sections.forEach((sec) => {
+      if (sec.offsetTop <= scrollY) current = sec;
+    });
+
+    tocLinks.forEach((link) => {
+      link.classList.remove("is-active");
+      if (link.getAttribute("href") === "#" + current.id) {
+        link.classList.add("is-active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateActive, { passive: true });
+  updateActive();
+})();

@@ -1,6 +1,6 @@
 <footer class="footer">
   <div class="container footer__inner">
-    <p class="footer__copy">© <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. Все права защищены.</p>
+    <p class="footer__copy">© 2020-<?php echo date('Y'); ?> <?php bloginfo('name'); ?>. Все права защищены.</p>
 
     <?php
     wp_nav_menu([
